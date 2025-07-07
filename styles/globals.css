@@ -493,6 +493,18 @@ select.form-control {
   .btn {
     padding: 0.75rem 1.5rem;
   }
+  
+  /* Desktop-specific row layout */
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .row > .col-md-6 {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 @media (min-width: 992px) {
@@ -504,6 +516,16 @@ select.form-control {
 
 /* Mobile-specific optimizations */
 @media (max-width: 767px) {
+  /* Mobile-specific SGPA result layout */
+  .sgpa-result-container {
+    flex-direction: column !important;
+  }
+  
+  .sgpa-result-container > div {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 1rem;
+  }
   .app-content {
     padding: 10px;
     margin-left: 0 !important;
@@ -584,6 +606,17 @@ select.form-control {
   /* Mobile form optimizations */
   .form-group {
     margin-bottom: 1.5rem;
+  }
+  
+  /* Mobile-specific row layout - keep stacked */
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .row > .col-md-6 {
+    width: 100%;
+    margin-bottom: 1rem;
   }
   
   .form-label {

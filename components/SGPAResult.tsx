@@ -28,8 +28,18 @@ const SGPAResult: React.FC<SGPAResultProps> = ({ result }) => {
             </div>
           </div>
           
-          <div className="row">
-            <div className="col-md-6">
+          <div className="sgpa-result-container" style={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '1rem',
+            justifyContent: 'center',
+            flexWrap: 'wrap'
+          }}>
+            <div style={{
+              flex: '1',
+              minWidth: '200px',
+              maxWidth: '300px'
+            }}>
               <div className="card">
                 <div className="card-body text-center">
                   <div className="text-muted">Total Credits</div>
@@ -37,7 +47,11 @@ const SGPAResult: React.FC<SGPAResultProps> = ({ result }) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div style={{
+              flex: '1',
+              minWidth: '200px',
+              maxWidth: '300px'
+            }}>
               <div className="card">
                 <div className="card-body text-center">
                   <div className="text-muted">Total Points</div>
