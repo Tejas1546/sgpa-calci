@@ -1,33 +1,38 @@
-# SGPA Calculator
+# SGPA Calculator - Sahyadri College
 
-A modern, responsive SGPA (Semester Grade Point Average) calculator built with Next.js, TypeScript, and Tailwind CSS.
+A modern, responsive SGPA (Semester Grade Point Average) calculator specifically designed for Sahyadri College students. Built with Next.js, TypeScript, and Tailwind CSS.
 
-## Features
+## 🎯 Features
 
-- 🎯 **Easy to Use**: Simple dropdown selection for semester, department, and sub-branch
-- 📊 **Real-time Calculation**: Instant SGPA calculation with the formula: SGPA = Σ(Credits × Grade) / Σ(Credits)
-- 🎨 **Modern UI**: Beautiful, responsive design with Tailwind CSS
-- 📱 **Mobile Friendly**: Works perfectly on all devices
-- 🔄 **Dynamic Subjects**: Loads different subjects based on semester and department selection
-- 📈 **Visual Results**: Color-coded SGPA results with performance indicators
+- **🎓 Sahyadri College Focused**: Tailored specifically for Sahyadri College students with department-specific subjects
+- **📱 Single Page Experience**: Seamless dropdown selection and calculation on one page
+- **⚡ Real-time Calculation**: Instant SGPA calculation with the formula: SGPA = Σ(Credits × Grade) / Σ(Credits)
+- **🎨 Modern UI**: Beautiful, responsive design with professional styling
+- **📊 Dynamic Subject Loading**: Automatically loads relevant subjects based on your selections
+- **✅ Input Validation**: Ensures grades are between 0-10 scale
+- **📈 Visual Results**: Color-coded SGPA results with performance indicators
+- **🔔 Student Notice**: Built-in warning for Sahyadri College students only
 
-## Supported Departments
+## 🏫 Supported Departments & Semesters
 
-- **CSE (Computer Science Engineering)**
-  - Semester 6, 7, 8
+### CSE (Computer Science Engineering)
+- **Semester 4**: Complete subject list with credits
+- **Semester 6**: Complete subject list with credits
 
-- **ISE (Information Science Engineering)**
-  - Sub-branches: ISE, DS (Data Science)
-  - Semester 6, 7, 8
+### ISE (Information Science Engineering)
+- **Semester 4**: Complete subject list with credits  
+- **Semester 6**: Complete subject list with credits
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **Framework**: Next.js 13 with Pages Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
-- **Deployment**: Vercel-ready
+- **Icons**: Feather Icons
+- **Analytics**: Vercel Web Analytics
+- **Deployment**: Vercel
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -36,27 +41,23 @@ A modern, responsive SGPA (Semester Grade Point Average) calculator built with N
 
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository:**
 ```bash
-git clone <repository-url>
-cd sgpa-calculator
+git clone https://github.com/Tejas1546/sgpa-calci.git
+cd sgpa-calci
 ```
 
-2. Install dependencies:
+2. **Install dependencies:**
 ```bash
 npm install
-# or
-yarn install
 ```
 
-3. Run the development server:
+3. **Run the development server:**
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. **Open [http://localhost:3000](http://localhost:3000) in your browser.**
 
 ### Building for Production
 
@@ -65,21 +66,20 @@ npm run build
 npm start
 ```
 
-## Project Structure
+## 📁 Project Structure
 
 ```
-sgpa-calculator/
+sgpa-calci/
 ├── components/          # React components
-│   ├── Header.tsx      # Application header
 │   ├── Sidebar.tsx     # Navigation sidebar
 │   ├── SubjectTable.tsx # Subject grades table
 │   └── SGPAResult.tsx  # SGPA result display
 ├── data/               # Static data
 │   └── subjects.ts     # Subject data for all departments
 ├── pages/              # Next.js pages
-│   ├── _app.tsx        # App wrapper
-│   ├── index.tsx       # Landing page
-│   └── calculator.tsx  # Calculator page
+│   ├── _app.tsx        # App wrapper with analytics
+│   ├── index.tsx       # Main calculator page
+│   └── calculator.tsx  # Calculator page (legacy)
 ├── styles/             # Styles
 │   └── globals.css     # Global styles with Tailwind
 ├── types/              # TypeScript types
@@ -89,22 +89,21 @@ sgpa-calculator/
 └── public/             # Static assets
 ```
 
-## Usage
+## 📖 How to Use
 
-1. **Select Semester**: Choose your semester (6, 7, or 8)
-2. **Select Department**: Choose between CSE or ISE
+1. **Select Department**: Choose between CSE or ISE
+2. **Select Semester**: Choose your semester (4 or 6)
 3. **Select Sub-branch** (for ISE only): Choose between ISE or DS
-4. **Load Subjects**: Click "Load Subjects" to see your subjects
-5. **Enter Grades**: Input your grades for each subject (0-10 scale)
-6. **Calculate SGPA**: Click "Calculate SGPA" to see your result
+4. **Enter Grades**: Input your grades for each subject (0-10 scale)
+5. **View Results**: Your SGPA will be calculated and displayed automatically
 
-## Grade Scale
+## 📊 Grade Scale
 
 The calculator uses a 10-point scale:
-- **0.0 - 10.0**: Decimal values are supported
+- **Range**: 0.0 - 10.0 (decimal values supported)
 - **Examples**: 8.5, 7.75, 9.0, 6.5
 
-## SGPA Formula
+## 🧮 SGPA Formula
 
 ```
 SGPA = Σ(Credits × Grade) / Σ(Credits)
@@ -114,33 +113,57 @@ Where:
 - **Credits**: Credit weight of each subject
 - **Grade**: Your grade in that subject (0-10 scale)
 
-## Performance Indicators
+## 🎯 Performance Indicators
 
-- **9.0+**: Excellent (Green)
-- **8.0-8.9**: Very Good (Blue)
-- **7.0-7.9**: Good (Yellow)
-- **6.0-6.9**: Average (Orange)
-- **<6.0**: Needs Improvement (Red)
+- **9.0+**: Excellent (Green) 🟢
+- **8.0-8.9**: Very Good (Blue) 🔵
+- **7.0-7.9**: Good (Yellow) 🟡
+- **6.0-6.9**: Average (Orange) 🟠
+- **<6.0**: Needs Improvement (Red) 🔴
 
-## Deployment
+## 🌐 Deployment
 
-This project is ready for deployment on Vercel:
+This project is deployed on Vercel:
 
-1. Push your code to GitHub
-2. Connect your repository to Vercel
+- **Live URL**: [Your Vercel URL here]
+- **GitHub Repository**: https://github.com/Tejas1546/sgpa-calci
+- **Automatic Deployments**: Every push to main branch triggers deployment
+
+### Deploy Your Own
+
+1. Fork this repository
+2. Connect to Vercel
 3. Deploy automatically
 
-## Contributing
+## 📊 Analytics
+
+This project includes Vercel Web Analytics to track usage and performance metrics.
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## License
+## 📝 License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## Support
+## 🆘 Support
 
-If you encounter any issues or have questions, please open an issue on GitHub. 
+- **For Sahyadri College Students**: This calculator is specifically designed for your curriculum
+- **Issues**: Please open an issue on GitHub for bugs or feature requests
+- **Questions**: Feel free to reach out through GitHub discussions
+
+## 🙏 Acknowledgments
+
+- Sahyadri College for the curriculum structure
+- Next.js team for the amazing framework
+- Vercel for hosting and analytics
+- Tailwind CSS for the beautiful styling
+
+---
+
+**Note**: This calculator is specifically designed for Sahyadri College students. Please ensure you're using the correct subjects and credits for your curriculum. 
