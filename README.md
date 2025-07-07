@@ -100,7 +100,7 @@ Where:
 
 This project is deployed on Vercel:
 
-- **Live URL**: [Your Vercel URL here]
+- **Live URL**: https://sgpa-calci.vercel.app/
 - **GitHub Repository**: https://github.com/Tejas1546/sgpa-calci
 - **Automatic Deployments**: Every push to main branch triggers deployment
 
