@@ -1,7 +1,12 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Analytics } from '@vercel/analytics/react';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../styles/globals.css';
+
+// Prevent FontAwesome from adding its CSS since we did it manually above
+config.autoAddCss = false;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

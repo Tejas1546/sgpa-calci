@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import feather from 'feather-icons';
 import { Department, Semester, SubBranch } from '../types';
 import SubjectTable from '../components/SubjectTable';
 import SGPAResult from '../components/SGPAResult';
 import { subjectData } from '../data/subjects';
 import { calculateSGPA } from '../utils/calculator';
 import { Subject, SubjectWithGrade, CalculationResult } from '../types';
+import { FontAwesomeIcon, icons } from '../utils/icons';
 
 const HomePage: React.FC = () => {
   const [semester, setSemester] = useState<Semester | ''>('');
@@ -19,9 +19,7 @@ const HomePage: React.FC = () => {
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [showCalculator, setShowCalculator] = useState(false);
 
-  useEffect(() => {
-    feather.replace();
-  }, []);
+
 
   useEffect(() => {
     // Show semester dropdown when department is selected
@@ -196,7 +194,10 @@ const HomePage: React.FC = () => {
 
             {/* Content */}
             <div className="text-center mb-4">
-              <i data-feather="alert-triangle" style={{ width: '48px', height: '48px', color: 'white', marginBottom: '20px' }}></i>
+              <FontAwesomeIcon 
+                icon={icons.exclamationTriangle} 
+                style={{ width: '48px', height: '48px', color: 'white', marginBottom: '20px' }} 
+              />
               <h4 style={{ color: 'white', marginBottom: '20px' }}>Important Notice</h4>
             </div>
 
@@ -245,7 +246,10 @@ const HomePage: React.FC = () => {
           <div className="col-lg-12">
             <div className="mt-20 card">
               <div className="card-header">
-                <div className="card-title">SGPA Calculator</div>
+                <div className="card-title flex items-center gap-2">
+                  <FontAwesomeIcon icon={icons.graduationCap} className="text-blue-600" />
+                  SGPA Calculator
+                </div>
                 <div className="card-options">
                   <div className="pull-right">
                   </div>
@@ -328,7 +332,7 @@ const HomePage: React.FC = () => {
                               onClick={handleReset}
                               className="btn btn-secondary btn-sm mr-2"
                             >
-                              <i data-feather="refresh-cw" className="mr-1"></i>
+                              <FontAwesomeIcon icon={icons.times} className="mr-1" />
                               Reset Grades
                             </button>
                           </div>
@@ -354,7 +358,7 @@ const HomePage: React.FC = () => {
                         onClick={handleCalculate}
                         className="btn btn-success btn-lg"
                       >
-                        <i data-feather="calculator" className="mr-2"></i>
+                        <FontAwesomeIcon icon={icons.calculator} className="mr-2" />
                         Calculate SGPA
                       </button>
                     </div>
