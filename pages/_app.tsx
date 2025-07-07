@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>SGPA Calculator</title>
+        <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <meta name="description" content="SGPA Calculator for Sahyadri College students" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
