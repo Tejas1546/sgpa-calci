@@ -45,12 +45,17 @@ const HomePage: React.FC = () => {
     // Load subjects when all selections are complete
     if (department && semester) {
       if (department === 'ISE') {
-        // For ISE, wait for sub-branch selection
-        if (subBranch) {
-          loadSubjectsForSelection(department, semester, subBranch);
+        if (semester === '6') {
+          // For ISE 6th sem, wait for sub-branch selection
+          if (subBranch) {
+            loadSubjectsForSelection(department, semester, subBranch);
+          }
+        } else if (semester === '4') {
+          // For ISE 4th sem, load subjects immediately with subBranch 'ISE'
+          loadSubjectsForSelection(department, semester, 'ISE');
         }
       } else {
-        // For CSE, load immediately after semester selection
+        // For other departments, load immediately after semester selection
         loadSubjectsForSelection(department, semester, '');
       }
     }
