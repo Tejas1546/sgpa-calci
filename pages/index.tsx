@@ -332,7 +332,7 @@ const HomePage: React.FC = () => {
                       <div className="card-header">
                         <div className="card-title">
                           {department} - Semester {semester}
-                          {department === 'ISE' && ` (${subBranch})`}
+                          {department === 'ISE' && semester === '6' && subBranch && ` (${subBranch})`}
                         </div>
                         <div className="card-options">
                           <div className="pull-right">

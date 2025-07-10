@@ -32,7 +32,21 @@ const SubjectTable: React.FC<SubjectTableProps> = ({ subjects, grades, onGradeCh
                     {index + 1}
                   </td>
                   <td style={{ textAlign: 'left', verticalAlign: 'middle' }}>
-                    <div className="font-weight-semibold">{subject.name}</div>
+                    <div className="hidden md:block font-weight-semibold" style={{ wordBreak: 'break-word' }}>
+                      {subject.name}
+                    </div>
+                    <div className="block md:hidden font-weight-semibold" style={{ wordBreak: 'break-word' }}>
+                      {(() => {
+                        const maxLen = 20;
+                        if (subject.name.length <= maxLen) return subject.name;
+                        const breakIndex = subject.name.lastIndexOf(' ', maxLen);
+                        if (breakIndex === -1) return subject.name;
+                        return <>
+                          {subject.name.slice(0, breakIndex)}<br />
+                          {subject.name.slice(breakIndex + 1)}
+                        </>;
+                      })()}
+                    </div>
                   </td>
                   <td style={{ textAlign: 'center', verticalAlign: 'middle' }}>
                     <span className="badge badge-primary" style={{ display: 'inline-block', minWidth: '30px' }}>{subject.credits}</span>
@@ -57,8 +71,7 @@ const SubjectTable: React.FC<SubjectTableProps> = ({ subjects, grades, onGradeCh
                           e.target.value = '';
                         }
                       }}
-                      className="form-control form-control-sm"
-                      style={{ width: '80px', margin: '0 auto', display: 'block' }}
+                      className="form-control form-control-sm mx-auto block w-20 md:w-28"
                       placeholder="0"
                     />
                   </td>
