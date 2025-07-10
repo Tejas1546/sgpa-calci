@@ -68,5 +68,31 @@ export const subjectData: SubjectData = {
         { name: "MongoDB", credits: 1 }
       ]
     }
+  },
+  ECE: {
+    "4": [
+      { name: "Moderm control systems", credits: 4 },
+      { name: "Microelectronic Circuits", credits: 4 },
+      { name: "Principles of communication system", credits: 3 },
+      { name: "Signals and Systems", credits: 3 },
+      { name: "Communication laboratory", credits: 1 },
+      { name: "8051 Microcontroller", credits: 3 },
+      { name: "Engineering Statistics and Linear Algebra", credits: 3 },
+      { name: "Electronic Devices", credits: 3 },
+      { name: "PCB Design", credits: 2 },
+      { name: "Biology for Engineers", credits: 2 },
+      { name: "UHV Course", credits: 1 }
+    ],
+    "6": [
+      { name: "Management Course specific to the Program", credits: 3 },
+      { name: "Information Theory and Coding", credits: 4 },
+      { name: "VLSI Design and Testing", credits: 4 },
+      { name: "Machine Learning", credits: 3 },
+      { name: "Digital Image Processing", credits: 3 },
+      { name: "Open Elective Course", credits: 3 },
+      { name: "Project Work Phase 1", credits: 4 },
+      { name: "VLSI Design Lab", credits: 1 },
+      { name: "Automotive Electronics", credits: 3 }
+    ]
   }
 }; 

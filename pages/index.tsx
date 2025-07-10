@@ -59,8 +59,8 @@ const HomePage: React.FC = () => {
     try {
       let subjectList: Subject[] = [];
       
-      if (dept === 'CSE') {
-        subjectList = subjectData.CSE[sem] as Subject[];
+      if (dept === 'CSE' || dept === 'ECE') {
+        subjectList = subjectData[dept][sem] as Subject[];
       } else if (dept === 'ISE') {
         const iseData = subjectData.ISE[sem] as { [key: string]: Subject[] };
         subjectList = iseData[subBr] || [];
@@ -271,6 +271,7 @@ const HomePage: React.FC = () => {
                         <option value="">Select Department</option>
                         <option value="CSE">Computer Science Engineering (CSE)</option>
                         <option value="ISE">Information Science Engineering (ISE)</option>
+                        <option value="ECE">Electronics and Communication Engineering (ECE)</option>
                       </select>
                     </div>
                   </div>

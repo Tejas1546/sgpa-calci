@@ -13,6 +13,6 @@ export interface CalculationResult {
   totalPoints: number;
 }
 
-export type Department = 'CSE' | 'ISE';
+export type Department = 'CSE' | 'ISE' | 'ECE';
 export type Semester = '4' | '6';
 export type SubBranch = 'DS' | 'ISE'; 
