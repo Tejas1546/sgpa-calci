@@ -54,7 +54,7 @@ export const subjectData: SubjectData = {
         { name: "Cryptography and network security", credits: 3 },
         { name: "Open Elective Course", credits: 3 },
         { name: "Project Work Phase 1", credits: 4 },
-        { name: "data science laborotary", credits: 1 },
+        { name: "Data Science Laborotary", credits: 1 },
         { name: "MongoDB", credits: 1 }
       ],
       ISE: [
@@ -64,7 +64,7 @@ export const subjectData: SubjectData = {
         { name: "Cryptography and network security", credits: 3 },
         { name: "Open Elective Course", credits: 3 },
         { name: "Project Work Phase 1", credits: 4 },
-        { name: "Artificial Inteligence and Machine learning laborotary", credits: 1 },
+        { name: "Artificial Inteligence and Machine learning Laborotary", credits: 1 },
         { name: "MongoDB", credits: 1 }
       ]
     }
@@ -93,6 +93,28 @@ export const subjectData: SubjectData = {
       { name: "Project Work Phase 1", credits: 4 },
       { name: "VLSI Design Lab", credits: 1 },
       { name: "Automotive Electronics", credits: 3 }
+    ]
+  },
+  MRE: {
+    "4": [
+      { name: "Engineering Thermodynamics", credits: 4 },
+      { name: "Mechanics of Materials", credits: 4 },
+      { name: "Manufacturing Processes", credits: 3 },
+      { name: "Fluid Mechanics", credits: 3 },
+      { name: "Thermodynamics Lab", credits: 1 },
+      { name: "Materials Lab", credits: 1 },
+      { name: "Mathematics", credits: 3 },
+      { name: "Open Elective Course", credits: 3 }
+    ],
+    "6": [
+      { name: "Technology Entrepreneurship and Business", credits: 3 },
+      { name: "Microcontroller and PLC", credits: 4 },
+      { name: "Robot Design and Programming", credits: 4 },
+      { name: "Computer Vision and Deep Learning", credits: 3 },
+      { name: "Open Elective Course", credits: 3 },
+      { name: "Project Work Phase 1", credits: 4 },
+      { name: "Robot Programming Laboratory", credits: 1 },
+      { name: "ML Using Tensorflow", credits: 3 }
     ]
   }
 }; 
