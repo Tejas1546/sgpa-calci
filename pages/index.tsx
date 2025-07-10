@@ -6,6 +6,7 @@ import { subjectData } from '../data/subjects';
 import { calculateSGPA } from '../utils/calculator';
 import { Subject, SubjectWithGrade, CalculationResult } from '../types';
 import { FontAwesomeIcon, icons } from '../utils/icons';
+import CGPACalculator from '../components/CGPACalculator';
 
 const HomePage: React.FC = () => {
   const [semester, setSemester] = useState<Semester | ''>('');
@@ -367,9 +368,20 @@ const HomePage: React.FC = () => {
 
                     {/* Result */}
                     {result && (
-                      <div className="mt-4">
-                        <SGPAResult result={result} />
-                      </div>
+                      <>
+                        <div className="mt-4">
+                          <SGPAResult result={result} />
+                        </div>
+                        {/* CGPA Calculator Section */}
+                        <div className="mt-4 card">
+                          <div className="card-header">
+                            <div className="card-title">CGPA Calculator</div>
+                          </div>
+                          <div className="card-body">
+                            <CGPACalculator sgpa={result.sgpa} semester={semester} />
+                          </div>
+                        </div>
+                      </>
                     )}
 
                     {/* Instructions */}
