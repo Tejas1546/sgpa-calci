@@ -32,8 +32,8 @@ const HomePage: React.FC = () => {
   }, [department]);
 
   useEffect(() => {
-    // Show sub-branch dropdown for ISE department
-    if (department === 'ISE' && showSemesterDropdown && semester) {
+    // Show sub-branch dropdown for ISE department and only for 6th semester
+    if (department === 'ISE' && showSemesterDropdown && semester === '6') {
       setShowSubBranchDropdown(true);
     } else {
       setShowSubBranchDropdown(false);
