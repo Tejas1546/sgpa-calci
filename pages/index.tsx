@@ -100,7 +100,7 @@ const HomePage: React.FC = () => {
         // For 1st and 2nd semesters, use cycle
         const cycleData = subjectData[schema][dept][sem] as { [key: string]: Subject[] };
         subjectList = cycleData && cycleData[cyc] ? cycleData[cyc] : [];
-      } else if (dept === 'CSE' || dept === 'ECE' || dept === 'MRE') {
+      } else if (dept === 'CSE' || dept === 'ECE' || dept === 'EEE' || dept === 'ME' || dept === 'CE') {
         subjectList = subjectData[schema][dept][sem] as Subject[];
       } else if (dept === 'ISE') {
         if (schema === '2022') {
