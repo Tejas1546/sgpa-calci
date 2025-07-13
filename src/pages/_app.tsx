@@ -4,7 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import '../styles/globals.css';
+import '../../styles/globals.css';
 
 // Prevent FontAwesome from adding its CSS since we did it manually above
 config.autoAddCss = false;

@@ -1,4 +1,4 @@
-import { SubjectWithGrade, CalculationResult } from '../types';
+import { SubjectWithGrade, CalculationResult } from '../models/types';
 
 export const calculateSGPA = (subjects: SubjectWithGrade[]): CalculationResult => {
   let totalCredits = 0;

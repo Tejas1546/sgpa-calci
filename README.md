@@ -1,16 +1,26 @@
 # SGPA Calculator - Sahyadri College
 
-A modern, responsive SGPA (Semester Grade Point Average) calculator specifically designed for Sahyadri College students. Built with Next.js, TypeScript, and Tailwind CSS.
+A modern, responsive SGPA (Semester Grade Point Average) and CGPA calculator specifically designed for Sahyadri College students. Built with Next.js, TypeScript, and Tailwind CSS.
 
-## 🏫 Supported Departments & Semesters
+## 🏫 Supported Schemas & Departments
 
-### CSE (Computer Science Engineering)
-- **Semester 4**: Complete subject list with credits
-- **Semester 6**: Complete subject list with credits
+### Schema 2022 & 2024
+- **CSE (Computer Science Engineering)**
+- **ISE (Information Science Engineering)**
+- **ECE (Electronics & Communication Engineering)**
+- **EEE (Electrical & Electronics Engineering)**
+- **ME (Mechanical Engineering)**
+- **CE (Civil Engineering)**
 
-### ISE (Information Science Engineering)
-- **Semester 4**: Complete subject list with credits  
-- **Semester 6**: Complete subject list with credits
+## 📚 Semester Coverage
+
+### Semesters 1 & 2 (All Departments)
+- **Cycle Selection**: Physics or Chemistry
+- **Common subjects** with department-specific variations
+
+### Semesters 3-8 (All Departments)
+- **Direct subject selection** based on department and semester
+- **Complete subject lists** with proper credit distribution
 
 ## 🛠️ Tech Stack
 
@@ -60,11 +70,12 @@ npm start
 ```
 sgpa-calci/
 ├── components/          # React components
+│   ├── CGPACalculator.tsx # CGPA calculation component
+│   ├── SGPAResult.tsx  # SGPA result display
 │   ├── Sidebar.tsx     # Navigation sidebar
-│   ├── SubjectTable.tsx # Subject grades table
-│   └── SGPAResult.tsx  # SGPA result display
+│   └── SubjectTable.tsx # Subject grades table
 ├── data/               # Static data
-│   └── subjects.ts     # Subject data for all departments
+│   └── subjects.ts     # Subject data for all schemas/departments
 ├── pages/              # Next.js pages
 │   ├── _app.tsx        # App wrapper with analytics
 │   ├── index.tsx       # Main calculator page
@@ -74,27 +85,55 @@ sgpa-calci/
 ├── types/              # TypeScript types
 │   └── index.ts        # Type definitions
 ├── utils/              # Utility functions
-│   └── calculator.ts   # SGPA calculation logic
+│   ├── calculator.ts   # SGPA calculation logic
+│   └── icons.ts        # Icon utilities
 └── public/             # Static assets
 ```
 
 ## 📖 How to Use
 
-1. **Select Department**: Choose between CSE or ISE
-2. **Select Semester**: Choose your semester (4 or 6)
-3. **Select Sub-branch** (for ISE only): Choose between ISE or DS
-4. **Enter Grades**: Input your grades for each subject (0-10 scale)
-5. **View Results**: Your SGPA will be calculated and displayed automatically
+### SGPA Calculation
+1. **Select Schema**: Choose between 2022 or 2024 schema
+2. **Select Department**: Choose your engineering department
+3. **Select Semester**: Choose your semester (1-8)
+4. **Select Cycle** (Semesters 1-2 only): Choose Physics or Chemistry
+5. **Enter Grades**: Input your grades for each subject (0-10 scale)
+6. **View Results**: Your SGPA will be calculated and displayed automatically
 
-## 🧮 SGPA Formula
+### CGPA Calculation
+1. **Auto-fill**: Current semester SGPA is automatically filled from your SGPA calculation
+2. **Previous Semesters**: Previous semester SGPA values are auto-filled from stored calculations
+3. **Manual Override**: You can edit any SGPA value manually
+4. **Calculate**: Click "Calculate CGPA" to get your cumulative GPA
+5. **Clear Memory**: Use "Clear Memory" to reset all values
 
+## 🧮 Calculation Formulas
+
+### SGPA Formula
 ```
 SGPA = Σ(Credits × Grade) / Σ(Credits)
+```
+
+### CGPA Formula
+```
+CGPA = Σ(Semester SGPA) / Number of Semesters
 ```
 
 Where:
 - **Credits**: Credit weight of each subject
 - **Grade**: Your grade in that subject (0-10 scale)
+- **Semester SGPA**: SGPA for each completed semester
+
+## ✨ Key Features
+
+- **Multi-Schema Support**: 2022 and 2024 curriculum schemas
+- **All Departments**: Complete coverage for all engineering branches
+- **All Semesters**: Semesters 1-8 with proper subject distribution
+- **Cycle Selection**: Physics/Chemistry cycles for first year
+- **Auto-fill**: Smart auto-filling of SGPA values
+- **Memory Management**: Store and recall previous calculations
+- **Responsive Design**: Works on desktop, tablet, and mobile
+- **Real-time Calculation**: Instant SGPA/CGPA updates
 
 ## 🌐 Deployment
 
@@ -116,4 +155,4 @@ This project is deployed on Vercel:
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request 
+5. Open a Pull Request

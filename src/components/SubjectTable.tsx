@@ -1,5 +1,5 @@
 import React from 'react';
-import { Subject, SubjectWithGrade } from '../types';
+import { Subject, SubjectWithGrade } from '../models/types';
 
 interface SubjectTableProps {
   subjects: Subject[];

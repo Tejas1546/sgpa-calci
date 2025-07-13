@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Department, Semester, SubBranch } from '../types';
+import { Department, Semester, SubBranch, Cycle } from '../models/types';
 import SubjectTable from '../components/SubjectTable';
 import SGPAResult from '../components/SGPAResult';
-import { subjectData } from '../data/subjects';
-import { calculateSGPA } from '../utils/calculator';
-import { Subject, SubjectWithGrade, CalculationResult } from '../types';
+import { subjectData } from '../models/subjectData';
+import { calculateSGPA } from '../core/calculator';
+import { Subject, SubjectWithGrade, CalculationResult } from '../models/types';
 import { FontAwesomeIcon, icons } from '../utils/icons';
 import CGPACalculator from '../components/CGPACalculator';
 
@@ -12,14 +12,17 @@ const HomePage: React.FC = () => {
   const [semester, setSemester] = useState<Semester | ''>('');
   const [department, setDepartment] = useState<Department | ''>('');
   const [subBranch, setSubBranch] = useState<SubBranch | ''>('');
+  const [cycle, setCycle] = useState<Cycle | ''>('');
   const [showSemesterDropdown, setShowSemesterDropdown] = useState(false);
   const [showSubBranchDropdown, setShowSubBranchDropdown] = useState(false);
+  const [showCycleDropdown, setShowCycleDropdown] = useState(false);
   const [showWarningModal, setShowWarningModal] = useState(true);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [grades, setGrades] = useState<{ [key: string]: number }>({});
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [showCalculator, setShowCalculator] = useState(false);
-
+  const [calculatedResults, setCalculatedResults] = useState<{ [key: string]: { sgpa: number, credits: number, points: number } }>({});
+  const [schema, setSchema] = useState<string>('');
 
 
   useEffect(() => {
@@ -29,51 +32,91 @@ const HomePage: React.FC = () => {
     } else {
       setShowSemesterDropdown(false);
       setShowSubBranchDropdown(false);
+      setShowCycleDropdown(false);
     }
   }, [department]);
 
   useEffect(() => {
-    // Show sub-branch dropdown for ISE department and only for 6th semester
-    if (department === 'ISE' && showSemesterDropdown && semester === '6') {
+    // Show cycle dropdown for 1st and 2nd semesters
+    if (semester === '1' || semester === '2') {
+      setShowCycleDropdown(true);
+    } else {
+      setShowCycleDropdown(false);
+      setCycle('');
+    }
+  }, [semester]);
+
+  useEffect(() => {
+    // Show sub-branch dropdown only for 2022 schema, ISE department, and 6th semester
+    if (schema === '2022' && department === 'ISE' && showSemesterDropdown && semester === '6') {
       setShowSubBranchDropdown(true);
     } else {
       setShowSubBranchDropdown(false);
     }
-  }, [department, showSemesterDropdown, semester]);
+  }, [schema, department, showSemesterDropdown, semester]);
 
   useEffect(() => {
     // Load subjects when all selections are complete
-    if (department && semester) {
-      if (department === 'ISE') {
-        if (semester === '6') {
-          // For ISE 6th sem, wait for sub-branch selection
-          if (subBranch) {
-            loadSubjectsForSelection(department, semester, subBranch);
+    if (schema && department && semester) {
+      if (semester === '1' || semester === '2') {
+        // For 1st and 2nd semesters, wait for cycle selection
+        if (cycle) {
+          loadSubjectsForSelection(schema, department, semester, '', cycle);
+        }
+      } else if (department === 'ISE') {
+        if (schema === '2022') {
+          if (semester === '6') {
+            // For 2022 ISE 6th sem, wait for sub-branch selection
+            if (subBranch) {
+              loadSubjectsForSelection(schema, department, semester, subBranch, '');
+            }
+          } else if (semester === '4') {
+            // For 2022 ISE 4th sem, load subjects immediately with subBranch 'ISE'
+            loadSubjectsForSelection(schema, department, semester, 'ISE', '');
           }
-        } else if (semester === '4') {
-          // For ISE 4th sem, load subjects immediately with subBranch 'ISE'
-          loadSubjectsForSelection(department, semester, 'ISE');
+        } else {
+          // For 2024 ISE, ignore sub-branch and just load as array
+          loadSubjectsForSelection(schema, department, semester, '', '');
         }
       } else {
         // For other departments, load immediately after semester selection
-        loadSubjectsForSelection(department, semester, '');
+        loadSubjectsForSelection(schema, department, semester, '', '');
       }
     }
-  }, [department, semester, subBranch]);
+  }, [schema, department, semester, subBranch, cycle]);
 
-  const loadSubjectsForSelection = (dept: Department, sem: Semester, subBr: string) => {
+  const loadSubjectsForSelection = (schema: string, dept: Department, sem: Semester, subBr: string, cyc: string) => {
     try {
       let subjectList: Subject[] = [];
-      
-      if (dept === 'CSE' || dept === 'ECE' || dept === 'MRE') {
-        subjectList = subjectData[dept][sem] as Subject[];
-      } else if (dept === 'ISE') {
-        const iseData = subjectData.ISE[sem] as { [key: string]: Subject[] };
-        subjectList = iseData[subBr] || [];
+      if (!subjectData[schema] || !subjectData[schema][dept]) {
+        setSubjects([]);
+        setGrades({});
+        setResult(null);
+        setShowCalculator(false);
+        return;
       }
-
-      setSubjects(subjectList);
       
+      if (sem === '1' || sem === '2') {
+        // For 1st and 2nd semesters, use cycle
+        const cycleData = subjectData[schema][dept][sem] as { [key: string]: Subject[] };
+        subjectList = cycleData && cycleData[cyc] ? cycleData[cyc] : [];
+      } else if (dept === 'CSE' || dept === 'ECE' || dept === 'EEE' || dept === 'ME' || dept === 'CE') {
+        subjectList = subjectData[schema][dept][sem] as Subject[];
+      } else if (dept === 'ISE') {
+        if (schema === '2022') {
+          const iseData = subjectData[schema][dept][sem] as { [key: string]: Subject[] };
+          subjectList = iseData && iseData[subBr] ? iseData[subBr] : [];
+        } else {
+          // For 2024, treat as array
+          subjectList = subjectData[schema][dept][sem] as Subject[];
+        }
+      }
+      
+      // Ensure subjectList is always an array
+      if (!Array.isArray(subjectList)) {
+        subjectList = [];
+      }
+      setSubjects(subjectList);
       // Initialize grades with 0
       const initialGrades: { [key: string]: number } = {};
       subjectList.forEach(subject => {
@@ -91,8 +134,10 @@ const HomePage: React.FC = () => {
     setDepartment(selectedDepartment);
     setShowSemesterDropdown(false);
     setShowSubBranchDropdown(false);
+    setShowCycleDropdown(false);
     setSemester(''); // Reset semester
     setSubBranch(''); // Reset sub-branch
+    setCycle(''); // Reset cycle
     setShowCalculator(false);
     setSubjects([]);
     setGrades({});
@@ -101,17 +146,36 @@ const HomePage: React.FC = () => {
 
   const handleSemesterChange = (selectedSemester: Semester) => {
     setSemester(selectedSemester);
+    setCycle(''); // Reset cycle when semester changes
     // Don't hide calculator, just update subjects
     if (department) {
-      if (department === 'ISE') {
-        // For ISE, wait for sub-branch selection
-        if (subBranch) {
-          loadSubjectsForSelection(department, selectedSemester, subBranch);
+      if (selectedSemester === '1' || selectedSemester === '2') {
+        // For 1st and 2nd semesters, wait for cycle selection
+        if (cycle) {
+          loadSubjectsForSelection(schema, department, selectedSemester, '', cycle);
+        }
+      } else if (department === 'ISE') {
+        if (schema === '2022') {
+          // For ISE, wait for sub-branch selection
+          if (subBranch) {
+            loadSubjectsForSelection(schema, department, selectedSemester, subBranch, '');
+          }
+        } else {
+          // For CSE, load immediately
+          loadSubjectsForSelection(schema, department, selectedSemester, '', '');
         }
       } else {
         // For CSE, load immediately
-        loadSubjectsForSelection(department, selectedSemester, '');
+        loadSubjectsForSelection(schema, department, selectedSemester, '', '');
       }
+    }
+  };
+
+  const handleCycleChange = (selectedCycle: Cycle) => {
+    setCycle(selectedCycle);
+    // Don't hide calculator, just update subjects
+    if (department && semester) {
+      loadSubjectsForSelection(schema, department, semester, '', selectedCycle);
     }
   };
 
@@ -119,7 +183,7 @@ const HomePage: React.FC = () => {
     setSubBranch(selectedSubBranch);
     // Don't hide calculator, just update subjects
     if (department && semester) {
-      loadSubjectsForSelection(department, semester, selectedSubBranch);
+      loadSubjectsForSelection(schema, department, semester, selectedSubBranch, '');
     }
   };
 
@@ -138,6 +202,16 @@ const HomePage: React.FC = () => {
 
     const calculationResult = calculateSGPA(subjectsWithGrades);
     setResult(calculationResult);
+    
+    // Store the calculated SGPA, credits, and points for the current semester
+    setCalculatedResults(prev => ({
+      ...prev,
+      [semester]: { 
+        sgpa: calculationResult.sgpa, 
+        credits: calculationResult.totalCredits, 
+        points: calculationResult.totalPoints 
+      }
+    }));
   };
 
   const handleReset = () => {
@@ -146,6 +220,21 @@ const HomePage: React.FC = () => {
       resetGrades[subject.name] = 0;
     });
     setGrades(resetGrades);
+    setResult(null);
+  };
+
+  const handleSchemaChange = (selectedSchema: string) => {
+    setSchema(selectedSchema);
+    setDepartment('');
+    setSemester('');
+    setSubBranch('');
+    setCycle('');
+    setShowSemesterDropdown(false);
+    setShowSubBranchDropdown(false);
+    setShowCycleDropdown(false);
+    setShowCalculator(false);
+    setSubjects([]);
+    setGrades({});
     setResult(null);
   };
 
@@ -265,6 +354,23 @@ const HomePage: React.FC = () => {
                 <div className="row">
                   <div className="col-md-4">
                     <div className="form-group">
+                      <label htmlFor="schema" className="form-label">
+                        Schema
+                      </label>
+                      <select
+                        id="schema"
+                        value={schema}
+                        onChange={(e) => handleSchemaChange(e.target.value)}
+                        className="form-control"
+                      >
+                        <option value="">Select Schema</option>
+                        <option value="2022">2022 Schema</option>
+                        <option value="2024">2024 Schema</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="form-group">
                       <label htmlFor="department" className="form-label">
                         Department
                       </label>
@@ -273,6 +379,7 @@ const HomePage: React.FC = () => {
                         value={department}
                         onChange={(e) => handleDepartmentChange(e.target.value as Department)}
                         className="form-control"
+                        disabled={!schema}
                       >
                         <option value="">Select Department</option>
                         <option value="CSE">Computer Science Engineering (CSE)</option>
@@ -296,8 +403,34 @@ const HomePage: React.FC = () => {
                           className="form-control"
                         >
                           <option value="">Select Semester</option>
+                          <option value="1">Semester 1</option>
+                          <option value="2">Semester 2</option>
+                          <option value="3">Semester 3</option>
                           <option value="4">Semester 4</option>
+                          <option value="5">Semester 5</option>
                           <option value="6">Semester 6</option>
+                          <option value="7">Semester 7</option>
+                          <option value="8">Semester 8</option>
+                        </select>
+                      </div>
+                    </div>
+                  )}
+
+                  {showCycleDropdown && (
+                    <div className="col-md-4">
+                      <div className="form-group">
+                        <label htmlFor="cycle" className="form-label">
+                          Cycle
+                        </label>
+                        <select
+                          id="cycle"
+                          value={cycle}
+                          onChange={(e) => handleCycleChange(e.target.value as Cycle)}
+                          className="form-control"
+                        >
+                          <option value="">Select Cycle</option>
+                          <option value="Physics Cycle">Physics Cycle</option>
+                          <option value="Chemistry Cycle">Chemistry Cycle</option>
                         </select>
                       </div>
                     </div>
@@ -383,7 +516,15 @@ const HomePage: React.FC = () => {
                             <div className="card-title">CGPA Calculator</div>
                           </div>
                           <div className="card-body">
-                            <CGPACalculator sgpa={result.sgpa} semester={semester} />
+                            <CGPACalculator 
+                              sgpa={result.sgpa} 
+                              semester={semester} 
+                              currentTotalCredits={result.totalCredits}
+                              currentTotalPoints={result.totalPoints}
+                              calculatedResults={calculatedResults}
+                              schema={schema}
+                              department={department}
+                            />
                           </div>
                         </div>
                       </>
@@ -402,6 +543,9 @@ const HomePage: React.FC = () => {
                             <li>Examples: 8, 7, 9, 6, 10</li>
                             <li>Click "Calculate SGPA" to see your result</li>
                             <li>Use "Reset Grades" to clear all inputs</li>
+                            <li><strong>CGPA Calculator:</strong> After calculating SGPA, use the CGPA Calculator to find your cumulative GPA</li>
+                            <li><strong>Auto-fill Feature:</strong> Previous semester Total Points values are automatically mapped from your calculations</li>
+                            <li><strong>Manual Entry:</strong> You can manually enter Exact Grade Points values for semesters you haven't calculated yet</li>
                           </ul>
                         </div>
                       </div>

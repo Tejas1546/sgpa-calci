@@ -1,0 +1,209 @@
+{
+    "semesters": [
+        {
+            "semester": 1,
+            "cycle": "physics",
+            "sgpa": 9.50,
+            "cgpa": 9.50,
+            "subjects": [
+                {
+                    "name": "Applied Mathematics I",
+                    "grade_point": 10
+                },
+                {
+                    "name": "Engineering Physics",
+                    "grade_point": 10
+                },
+                {
+                    "name": "Principles of Programming with C",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Introduction to Electronics Engineering",
+                    "grade_point": 10
+                },
+                {
+                    "name": "Fundamentals of Industrial Automation Modelling",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Technical English I",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Samskrutika Kannada",
+                    "grade_point": 8
+                },
+                {
+                    "name": "Scientific foundations of Health",
+                    "grade_point": 9
+                }
+            ]
+        },
+        {
+            "semester": 2,
+            "cycle": "chemistry",
+            "sgpa": 9.60,
+            "cgpa": 9.55,
+            "subjects": [
+                {
+                    "name": "Applied Mathematics II",
+                    "grade_point": 10
+                },
+                {
+                    "name": "Engineering Chemistry",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Computer Aided Engineering Drawing",
+                    "grade_point": 10
+                },
+                {
+                    "name": "Introduction to Electrical Engineering",
+                    "grade_point": 10
+                },
+                {
+                    "name": "Introduction to Sustainable Infrastructure Technologies",
+                    "grade_point": 10
+                },
+                {
+                    "name": "Innovation and Design Thinking",
+                    "grade_point": 10
+                },
+                {
+                    "name": "Technical English II",
+                    "grade_point": 8
+                },
+                {
+                    "name": "Constitution of India, Professional Ethics and Cyber Law",
+                    "grade_point": 8
+                }
+            ]
+        },
+        {
+            "semester": 3,
+            "sgpa": 9.10,
+            "cgpa": 9.40,
+            "subjects": [
+                {
+                    "name": "Computational Discrete Mathematics",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Logic Design and Embedded Systems",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Object Oriented Programming Concepts",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Data Structures and Applications",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Data Structures Laboratory with C",
+                    "grade_point": 10
+                },
+                {
+                    "name": "Programming with Python",
+                    "grade_point": 9
+                },
+                {
+                    "name": "UHV-I: Social Connect and Responsibilities",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Competitive Programming using C++",
+                    "grade_point": 10
+                }
+            ]
+        },
+        {
+            "semester": 4,
+            "sgpa": 9.18,
+            "cgpa": 9.34,
+            "subjects": [
+                {
+                    "name": "Web Technology and Applications",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Operating Systems",
+                    "grade_point": 10
+                },
+                {
+                    "name": "Computer Organization and Architecture",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Design and Analysis of Algorithms",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Design and Analysis of Algorithms Lab",
+                    "grade_point": 10
+                },
+                {
+                    "name": "Advanced Graph Theory",
+                    "grade_point": 8
+                },
+                {
+                    "name": "Biology for Engineers",
+                    "grade_point": 10
+                },
+                {
+                    "name": "UHV-2: Understanding Harmony and Ethical Human Conduct",
+                    "grade_point": 8
+                },
+                {
+                    "name": "GitHub: AI-Powered Developer Platform",
+                    "grade_point": 10
+                }
+            ]
+        },
+        {
+            "semester": 5,
+            "sgpa": 8.50,
+            "cgpa": 9.16,
+            "subjects": [
+                {
+                    "name": "Machine Learning and Applications",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Computer Networks",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Automata Theory and Computability",
+                    "grade_point": 8
+                },
+                {
+                    "name": "Database Management Systems",
+                    "grade_point": 7
+                },
+                {
+                    "name": "Database Management Systems Lab",
+                    "grade_point": 10
+                },
+                {
+                    "name": "Mini-Project Work",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Secure Coding",
+                    "grade_point": 8
+                },
+                {
+                    "name": "Research Methodology and IPR",
+                    "grade_point": 9
+                },
+                {
+                    "name": "Environmental Studies",
+                    "grade_point": 9
+                }
+            ]
+        }
+    ]
+}

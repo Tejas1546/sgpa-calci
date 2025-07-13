@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "playwright test",
+    "test:unit": "playwright test --grep \"Unit:\"",
+    "test:e2e": "playwright test --grep \"E2E:\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -16,11 +19,12 @@
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "feather-icons": "^4.29.2",
-    "next": "^15.3.5",
+    "next": "15.3.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@types/feather-icons": "^4.29.4",
     "@types/node": "^20.5.0",
     "@types/prop-types": "^15.7.15",

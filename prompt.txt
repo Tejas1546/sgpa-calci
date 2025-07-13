@@ -1,0 +1,1 @@
+write a automated test using playwright to test the accuracy marks.json has my sub name and the gradepoints earned.. crossverify the result with the given sgpa and cgpa. Create all these tests inside a test folder

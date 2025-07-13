@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import feather from 'feather-icons';
 import SubjectTable from '../components/SubjectTable';
 import SGPAResult from '../components/SGPAResult';
-import { subjectData } from '../data/subjects';
-import { calculateSGPA } from '../utils/calculator';
-import { Subject, SubjectWithGrade, CalculationResult, Department, Semester, SubBranch } from '../types';
+import { subjectData } from '../models/subjectData';
+import { calculateSGPA } from '../core/calculator';
+import { Subject, SubjectWithGrade, CalculationResult, Department, Semester, SubBranch } from '../models/types';
 
 const CalculatorPage: React.FC = () => {
   const router = useRouter();
@@ -30,10 +30,34 @@ const CalculatorPage: React.FC = () => {
         let subjectList: Subject[] = [];
         
         if (department === 'CSE') {
-          subjectList = subjectData.CSE[semester] as Subject[];
+          const cseData = subjectData.CSE[semester];
+          if (Array.isArray(cseData)) {
+            subjectList = cseData;
+          } else if (typeof cseData === 'object' && cseData !== null) {
+            // Handle cycle-based structure for semesters 1-2
+            const cycleData = cseData as { [cycle: string]: Subject[] };
+            // Default to Physics Cycle if available, otherwise take first available cycle
+            subjectList = cycleData['Physics Cycle'] || cycleData['Chemistry Cycle'] || Object.values(cycleData)[0] || [];
+          }
         } else if (department === 'ISE') {
-          const iseData = subjectData.ISE[semester] as { [key: string]: Subject[] };
-          subjectList = iseData[subBranch] || [];
+          const iseData = subjectData.ISE[semester];
+          if (Array.isArray(iseData)) {
+            subjectList = iseData;
+          } else if (typeof iseData === 'object' && iseData !== null) {
+            // Handle sub-branch based structure
+            const subBranchData = iseData as { [key: string]: Subject[] };
+            subjectList = subBranchData[subBranch] || [];
+          }
+        } else if (['ECE', 'EEE', 'ME', 'CE'].includes(department)) {
+          const deptData = subjectData[department as keyof typeof subjectData]?.[semester];
+          if (Array.isArray(deptData)) {
+            subjectList = deptData;
+          } else if (typeof deptData === 'object' && deptData !== null) {
+            // Handle cycle-based structure for semesters 1-2
+            const cycleData = deptData as { [cycle: string]: Subject[] };
+            // Default to Physics Cycle if available, otherwise take first available cycle
+            subjectList = cycleData['Physics Cycle'] || cycleData['Chemistry Cycle'] || Object.values(cycleData)[0] || [];
+          }
         }
 
         setSubjects(subjectList);
