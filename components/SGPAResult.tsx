@@ -61,14 +61,6 @@ const SGPAResult: React.FC<SGPAResultProps> = ({ result }) => {
             </div>
           </div>
           
-          <div className="mt-4">
-            <div className="alert alert-info">
-              <h6 className="alert-heading">Formula Used</h6>
-              <code className="text-dark">
-                SGPA = {result.totalPoints.toFixed(1)} ÷ {result.totalCredits} = {result.sgpa}
-              </code>
-            </div>
-          </div>
         </div>
       </div>
     </div>
